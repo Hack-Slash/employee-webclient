@@ -1,11 +1,13 @@
 class EmployeesController < ApplicationController
   def index
-    @employees = Unirest.get("http://localhost:3000/api/v1/employees").body
+    @employees = Unirest.get("#{ENV['API_BASE_URL']}/employees").body
     render 'index.html.erb'
   end
 
   def show
-    @employee = Unirest.get("http://localhost:3000/api/v1/employees/#{params[:id]}").body
+    # employee_hash = Unirest.get("#{ENV['API_BASE_URL']}/employees/#{params[:id]}").body
+    # @employee =
+    @employee = Employee.new(employee_hash)
     render 'show.html.erb'
   end
 
@@ -14,7 +16,7 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    employee = Unirest.post("http://localhost:3000/api/v1/employees",
+    employee = Unirest.post("#{ENV['API_BASE_URL']}/employees",
                   headers:{ "Accept" => "application/json" },
                   parameters:{ :first_name => params[:input_first_name],
                                :email => params[:input_email],
@@ -28,12 +30,12 @@ class EmployeesController < ApplicationController
   end
 
   def edit
-    @employee = Unirest.get("http://localhost:3000/api/v1/employees/#{params[:id]}").body
+    @employee = Unirest.get("#{ENV['API_BASE_URL']}/employees/#{params[:id]}").body
     render 'edit.html.erb'
   end
 
   def update
-    employee = Unirest.put("http://localhost:3000/api/v1/employees/#{params[:id]}",
+    employee = Unirest.put("#{ENV['API_BASE_URL']}/employees/#{params[:id]}",
               headers:{ "Accept" => "application/json" },
               parameters:{ :first_name => params[:input_first_name],
                            :email => params[:input_email],
@@ -48,7 +50,7 @@ class EmployeesController < ApplicationController
   def destroy
     # grab the employee
     # destroy the employee
-    Unirest.delete("http://localhost:3000/api/v1/employees/#{params[:id]}")
+    Unirest.delete("#{ENV['API_BASE_URL']}/employees/#{params[:id]}")
     redirect_to "/employees"
   end
 end

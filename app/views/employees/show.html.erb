@@ -1,9 +1,9 @@
-<p><%= @employee['id'] %></p>
-<p><%= @employee['fn'] %></p>
-<p><%= @employee['ln'] %></p>
-<p><%= @employee['email'] %></p>
-<p><%= @employee['ssn'] %></p>
-<p><%= @employee['birthdate'] %></p>
+<p><%= @employee.id %></p>
+<p><%= @employee.first_name %></p>
+<p><%= @employee.last_name %></p>
+<p><%= @employee.email %></p>
+<p><%= @employee.ssn %></p>
+<p><%= @employee.birthdate %></p>
 
 
-<%= button_to "Fire this employee", "/employees/#{@employee['id']}", method: :delete %>
+<%= button_to "Fire this employee", "/employees/#{@employee.id}", method: :delete %>
