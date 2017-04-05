@@ -1,0 +1,9 @@
+<p><%= @employee['id'] %></p>
+<p><%= @employee['fn'] %></p>
+<p><%= @employee['ln'] %></p>
+<p><%= @employee['email'] %></p>
+<p><%= @employee['ssn'] %></p>
+<p><%= @employee['birthdate'] %></p>
+
+
+<%= button_to "Fire this employee", "/employees/#{@employee['id']}", method: :delete %>
