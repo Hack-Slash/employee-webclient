@@ -11,8 +11,11 @@ class Employee
   end
 
   def self.find(the_id)
-    # return ... an instance of the class employee
     employee_hash = Unirest.get("#{ENV['API_BASE_URL']}/employees/#{the_id}").body
     return Employee.new(employee_hash)
+  end
+
+  def self.all
+
   end
 end

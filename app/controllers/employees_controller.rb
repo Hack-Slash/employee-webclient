@@ -1,13 +1,12 @@
 class EmployeesController < ApplicationController
   def index
     @employees = Unirest.get("#{ENV['API_BASE_URL']}/employees").body
+    @employees = Employee.all # an array of instances of the class employee
     render 'index.html.erb'
   end
 
   def show
-    # employee_hash = Unirest.get("#{ENV['API_BASE_URL']}/employees/#{params[:id]}").body
-    # @employee =
-    @employee = Employee.new(employee_hash)
+    @employee = Employee.find(params[:id])
     render 'show.html.erb'
   end
 
