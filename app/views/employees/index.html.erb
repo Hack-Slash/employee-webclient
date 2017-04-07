@@ -1,12 +1,12 @@
 <p>Here are all the employees</p>
 
 <% @employees.each do |employee| %>
-  <p><%= employee['id'] %></p>
-  <p><%= employee['fn'] %></p>
-  <p><%= employee['ln'] %></p>
-  <p><%= employee['email'] %></p>
-  <p><%= employee['ssn'] %></p>
-  <p><%= employee['birthdate'] %></p>
+  <p><%= employee.id %></p>
+  <p><%= employee.first_name %></p>
+  <p><%= employee.last_name %></p>
+  <p><%= employee.email %></p>
+  <p><%= employee.ssn %></p>
+  <p><%= employee.birthdate %></p>
   <hr>
 <% end %>
 

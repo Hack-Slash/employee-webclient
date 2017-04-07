@@ -1,10 +1,10 @@
 <p>Here is a form to update a employee</p>
 
-<%= form_tag "/employees/#{@employee['id']}", method: :put do %>
-  first: <input type="text" name="input_first_name" value="<%= @employee['fn'] %>">
-  last: <input type="text" name="input_last_name" value="<%= @employee['ln'] %>">
-  birthdate: <input type="text" name="input_birthdate" value="<%= @employee['birthdate'] %>">
-  ssn: <input type="text" name="input_ssn" value="<%= @employee['ssn'] %>">
-  email: <input type="text" name="input_email" value="<%= @employee['email'] %>">
+<%= form_tag "/employees/#{@employee.id}", method: :put do %>
+  first: <input type="text" name="input_first_name" value="<%= @employee.first_name %>">
+  last: <input type="text" name="input_last_name" value="<%= @employee.last_name %>">
+  birthdate: <input type="text" name="input_birthdate" value="<%= @employee.birthdate %>">
+  ssn: <input type="text" name="input_ssn" value="<%= @employee.ssn %>">
+  email: <input type="text" name="input_email" value="<%= @employee.email %>">
   <input type="submit" value="Make a new employee">
 <% end %>

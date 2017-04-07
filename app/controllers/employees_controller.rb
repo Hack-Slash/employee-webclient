@@ -1,6 +1,5 @@
 class EmployeesController < ApplicationController
   def index
-    @employees = Unirest.get("#{ENV['API_BASE_URL']}/employees").body
     @employees = Employee.all # an array of instances of the class employee
     render 'index.html.erb'
   end
@@ -15,41 +14,36 @@ class EmployeesController < ApplicationController
   end
 
   def create
-    employee = Unirest.post("#{ENV['API_BASE_URL']}/employees",
-                  headers:{ "Accept" => "application/json" },
-                  parameters:{ :first_name => params[:input_first_name],
-                               :email => params[:input_email],
-                               :last_name => params[:input_last_name],
-                               :birthdate => params[:input_birthdate],
-                               :ssn => params[:input_ssn]
-                             }
-                ).body
-
+    employee = Employee.create(
+      first_name: params[:input_first_name],
+      last_name: params[:input_last_name],
+      ssn: params[:input_ssn],
+      email: params[:input_email],
+      birthdate: params[:input_birthdate]
+      )
     redirect_to "/employees/#{employee['id']}"
   end
 
   def edit
-    @employee = Unirest.get("#{ENV['API_BASE_URL']}/employees/#{params[:id]}").body
+    @employee = Employee.find(params[:id])
     render 'edit.html.erb'
   end
 
   def update
-    employee = Unirest.put("#{ENV['API_BASE_URL']}/employees/#{params[:id]}",
-              headers:{ "Accept" => "application/json" },
-              parameters:{ :first_name => params[:input_first_name],
-                           :email => params[:input_email],
-                           :last_name => params[:input_last_name],
-                           :birthdate => params[:input_birthdate],
-                           :ssn => params[:input_ssn]
-                         }
-            ).body
-    redirect_to "/employees/#{employee['id']}"
+    @employee = Employee.find(params[:id])
+    @employee.update(
+      first_name: params[:input_first_name],
+      last_name: params[:input_last_name],
+      ssn: params[:input_ssn],
+      email: params[:input_email],
+      birthdate: params[:input_birthdate]
+    )
+    redirect_to "/employees/#{@employee.id}"
   end
 
   def destroy
-    # grab the employee
-    # destroy the employee
-    Unirest.delete("#{ENV['API_BASE_URL']}/employees/#{params[:id]}")
+    employee = Employee.find(params[:id])
+    employee.destroy
     redirect_to "/employees"
   end
 end
